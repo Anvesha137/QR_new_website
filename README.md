@@ -66,12 +66,6 @@ DATABASE_URL=your_database_connection_string
 VITE_NEON_DB_URL=your_neon_db_url
 ```
 
-## API Endpoints
-
-The backend provides the following API endpoints:
-
-- `GET /api/chat-histories/:userEmail` - Get chat histories for a specific user
-- `GET /api/chat-histories` - Get all chat histories (admin only)
 
 ## Development
 
