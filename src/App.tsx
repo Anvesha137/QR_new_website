@@ -6,6 +6,7 @@ import DashboardHomepage from "./components/DashboardHomepage";
 import Features from "./components/Features";
 import PreFooter from "./components/PreFooter";
 import Footer from "./components/Footer";
+import { FeatureRichChatbot } from "./components/FeatureRichChatbot";
 import "./App.css";
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
       <Features />
       <PreFooter />
       <Footer />
+      <FeatureRichChatbot />
     </div>
   );
 }
