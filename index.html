@@ -404,7 +404,8 @@
           
           try {
             // Send message to n8n webhook
-            const response = await fetch('https://n8n.quickrevert.tech/webhook/bf4dd093-bb02-472c-9454-7ab9af97bd1d', {
+            const webhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL;
+            const response = await fetch(webhookUrl, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
