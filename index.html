@@ -298,6 +298,236 @@
       .n8n-chat-messages::-webkit-scrollbar-thumb:hover {
         background: #6366f1;
       }
+      
+      /* Menu chat styles */
+      #menu-chat-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+      }
+      
+      #menu-chat-button:active {
+        transform: translateY(0);
+      }
+      
+      /* Menu chat container styling */
+      #menu-chat-container.active {
+        display: block;
+      }
+      
+      /* Menu chat window styling */
+      #menu-chat {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #e2e8f0;
+      }
+      
+      /* Menu chat header */
+      .menu-chat-header {
+        background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%);
+        color: white;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .menu-chat-header__title {
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: 600;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      
+      .menu-chat-header__close {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 20px;
+        padding: 0;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: background 0.2s;
+      }
+      
+      .menu-chat-header__close:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      
+      /* Menu chat messages container */
+      .menu-chat-messages {
+        flex: 1;
+        padding: 16px;
+        overflow-y: auto;
+        background: #f8fafc;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      
+      /* Menu chat message styling */
+      .menu-chat-message {
+        display: flex;
+        gap: 12px;
+        max-width: 85%;
+      }
+      
+      .menu-chat-message__content {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      
+      .menu-chat-message__bubble {
+        padding: 12px 16px;
+        border-radius: 18px;
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 14px;
+        line-height: 1.4;
+        position: relative;
+        background: white;
+        color: #334155;
+        border: 1px solid #e2e8f0;
+        border-top-left-radius: 4px;
+      }
+      
+      .menu-chat-message__timestamp {
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 10px;
+        color: #94a3b8;
+        margin-top: 2px;
+      }
+      
+      /* Welcome message styling */
+      .menu-chat-welcome {
+        text-align: center;
+        padding: 16px;
+        background: white;
+        border-radius: 12px;
+        margin-bottom: 16px;
+        border: 1px solid #e2e8f0;
+      }
+      
+      .menu-chat-welcome__title {
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: 600;
+        font-size: 18px;
+        color: #0f172a;
+        margin-bottom: 8px;
+      }
+      
+      .menu-chat-welcome__message {
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 14px;
+        color: #64748b;
+        line-height: 1.5;
+        margin-bottom: 16px;
+      }
+      
+      /* Menu options */
+      .menu-options {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      
+      .menu-option {
+        background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%);
+        color: white;
+        border: none;
+        border-radius: 24px;
+        padding: 12px 20px;
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        text-align: left;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 4px rgba(99, 102, 241, 0.2);
+      }
+      
+      .menu-option:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(99, 102, 241, 0.3);
+      }
+      
+      /* Calendar button */
+      .calendar-button {
+        background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+        color: white;
+        border: none;
+        border-radius: 24px;
+        padding: 12px 20px;
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 4px rgba(74, 222, 128, 0.2);
+        margin: 10px 0;
+        display: block;
+        width: 100%;
+      }
+      
+      .calendar-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(74, 222, 128, 0.3);
+      }
+      
+      /* Back button */
+      .back-button {
+        background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
+        color: white;
+        border: none;
+        border-radius: 24px;
+        padding: 12px 20px;
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 4px rgba(148, 163, 184, 0.2);
+        margin: 10px 0;
+        display: block;
+        width: 100%;
+      }
+      
+      .back-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(148, 163, 184, 0.3);
+      }
+      
+      /* Scrollbar styling for menu chat */
+      .menu-chat-messages::-webkit-scrollbar {
+        width: 6px;
+      }
+      
+      .menu-chat-messages::-webkit-scrollbar-track {
+        background: #f1f5f9;
+      }
+      
+      .menu-chat-messages::-webkit-scrollbar-thumb {
+        background: #c7d2fe;
+        border-radius: 3px;
+      }
+      
+      .menu-chat-messages::-webkit-scrollbar-thumb:hover {
+        background: #6366f1;
+      }
     </style>
   </head>
 
@@ -497,6 +727,441 @@
           chatContainer.classList.add('active');
           sendInitialMessage();
         }, 1000);
+      
+        // Create menu-driven chat button
+        const menuChatButton = document.createElement('button');
+        menuChatButton.id = 'menu-chat-button';
+        menuChatButton.innerHTML = `
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+          QuickRevert AI
+        `;
+        menuChatButton.style.position = 'fixed';
+        menuChatButton.style.bottom = '20px';
+        menuChatButton.style.right = '200px';
+        menuChatButton.style.zIndex = '1000';
+        menuChatButton.style.border = 'none';
+        menuChatButton.style.borderRadius = '50px';
+        menuChatButton.style.padding = '12px 24px';
+        menuChatButton.style.background = 'linear-gradient(135deg, #6366f1 0%, #818cf8 100%)';
+        menuChatButton.style.color = 'white';
+        menuChatButton.style.fontWeight = '600';
+        menuChatButton.style.fontSize = '14px';
+        menuChatButton.style.cursor = 'pointer';
+        menuChatButton.style.boxShadow = '0 4px 12px rgba(99, 102, 241, 0.3)';
+        menuChatButton.style.display = 'flex';
+        menuChatButton.style.alignItems = 'center';
+        menuChatButton.style.gap = '8px';
+        menuChatButton.style.transition = 'all 0.3s ease';
+        document.body.appendChild(menuChatButton);
+      
+        // Create menu chat container
+        const menuChatContainer = document.createElement('div');
+        menuChatContainer.id = 'menu-chat-container';
+        menuChatContainer.innerHTML = `
+          <div id="menu-chat">
+            <div class="menu-chat-header">
+              <div class="menu-chat-header__title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                QuickRevert AI
+              </div>
+              <button class="menu-chat-header__close">&times;</button>
+            </div>
+            <div class="menu-chat-messages">
+              <div class="menu-chat-welcome">
+                <h3 class="menu-chat-welcome__title">Welcome to QuickRevert Assistant!</h3>
+                <p class="menu-chat-welcome__message">Hey 👋 Welcome to QuickRevert Assistant! How can I help you today?</p>
+                <div class="menu-options">
+                  <button class="menu-option">📅 Book a Meeting / Demo</button>
+                  <button class="menu-option">💡 About Our Services</button>
+                  <button class="menu-option">🏢 Industry Use Cases</button>
+                  <button class="menu-option">📈 Why Businesses Choose QuickRevert</button>
+                  <button class="menu-option">🆘 Get Support or Learn More</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        menuChatContainer.style.position = 'fixed';
+        menuChatContainer.style.bottom = '80px';
+        menuChatContainer.style.right = '20px';
+        menuChatContainer.style.width = '380px';
+        menuChatContainer.style.height = '500px';
+        menuChatContainer.style.zIndex = '1000';
+        menuChatContainer.style.fontFamily = "'Montserrat', sans-serif";
+        menuChatContainer.style.display = 'none';
+        document.body.appendChild(menuChatContainer);
+      
+        // Menu chat functionality
+        const toggleMenuChat = () => {
+          menuChatContainer.style.display = menuChatContainer.style.display === 'none' ? 'block' : 'none';
+        };
+      
+        const closeMenuChat = () => {
+          menuChatContainer.style.display = 'none';
+        };
+      
+        menuChatButton.addEventListener('click', toggleMenuChat);
+        document.querySelector('.menu-chat-header__close').addEventListener('click', closeMenuChat);
+      
+        // Handle menu options
+        document.querySelectorAll('.menu-option').forEach(button => {
+          button.addEventListener('click', function() {
+            const optionText = this.textContent;
+            handleMenuOption(optionText);
+          });
+        });
+      
+        // Handle menu option selection
+        const handleMenuOption = (option) => {
+          const messagesContainer = document.querySelector('.menu-chat-messages');
+              
+          // Clear previous options
+          const optionsContainer = document.querySelector('.menu-options');
+          if (optionsContainer) {
+            optionsContainer.remove();
+          }
+              
+          // Add user's selection as a message
+          const userMessageElement = document.createElement('div');
+          userMessageElement.className = 'menu-chat-message';
+          userMessageElement.innerHTML = `
+            <div class="menu-chat-message__content" style="align-self: flex-end;">
+              <div class="menu-chat-message__bubble" style="background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%); color: white; border: none; border-bottom-right-radius: 4px;">
+                ${option}
+              </div>
+              <div class="menu-chat-message__timestamp" style="color: #c7d2fe; text-align: right;">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+            </div>
+          `;
+          messagesContainer.appendChild(userMessageElement);
+              
+          let responseText = '';
+          let newOptions = [];
+              
+          switch(option) {
+            case '📅 Book a Meeting / Demo':
+              responseText = `You can schedule a meeting or demo with our team directly below 👇`;
+              
+              // Add response message
+              const responseElement = document.createElement('div');
+              responseElement.className = 'menu-chat-message';
+              responseElement.innerHTML = `
+                <div class="menu-chat-message__content">
+                  <div class="menu-chat-message__bubble">
+                    ${responseText.replace(/\n/g, '<br>')}
+                  </div>
+                  <div class="menu-chat-message__timestamp">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                </div>
+              `;
+              messagesContainer.appendChild(responseElement);
+              
+              // Create a calendar button
+              const googleCalendarUrl = 'https://calendar.app.google/vxx53dF3chEmrwtV8';
+              const calendarButton = document.createElement('button');
+              calendarButton.className = 'calendar-button';
+              calendarButton.textContent = '📅 Book Now on Google Calendar';
+              calendarButton.onclick = function() {
+                window.open(googleCalendarUrl, '_blank');
+              };
+              messagesContainer.appendChild(calendarButton);
+              
+              // Add back button
+              const backButton = document.createElement('button');
+              backButton.className = 'back-button';
+              backButton.textContent = '🔙 Return to Main Menu';
+              backButton.onclick = function() {
+                handleMenuOption('Main Menu');
+              };
+              messagesContainer.appendChild(backButton);
+              
+              messagesContainer.scrollTop = messagesContainer.scrollHeight;
+              return;
+            case '💡 About Our Services':
+              responseText = `Here’s what QuickRevert offers 💼
+
+✨ AI Automation Solutions – Connect workflows across tools like Google, Slack, and Notion.  
+
+🎙️ Voice AI & Chat Assistants – Deploy WhatsApp, Telegram, or website bots that actually understand.  
+
+📅 Meeting Automation – Book, update, and manage Google Calendar meetings automatically.  
+
+🔍 AI-Powered Search – Find anything across Google Drive, Sheets, or CRM with one query.`;
+              newOptions = [
+                '🚀 Explore Features in Detail',
+                '💬 Talk to an Expert',
+                '🔙 Return to Main Menu'
+              ];
+              break;
+            case '🏢 Industry Use Cases':
+              responseText = `We help automate workflows across industries 🏭  
+Choose your industry to see how QuickRevert can help 👇
+
+🏭 Industrial Automation  
+🏥 Healthcare  
+🏫 Education  
+🏪 Retail & E-commerce  
+🏢 Corporate / Enterprise`;
+              newOptions = [
+                '🏭 Industrial Automation',
+                '🏥 Healthcare',
+                '🏫 Education',
+                '🏪 Retail & E-commerce',
+                '🏢 Corporate / Enterprise',
+                '🔙 Return to Main Menu'
+              ];
+              break;
+            case '🏭 Industrial Automation':
+              responseText = `In manufacturing, QuickRevert helps with:
+- Predictive maintenance using IoT data  
+- Real-time monitoring dashboards  
+- Automated reporting & alerts  
+- Integration with PLC systems`;
+              newOptions = [
+                '📊 See a Live Case Study',
+                '🔙 Return to Industry Menu'
+              ];
+              break;
+            case '🏥 Healthcare':
+              responseText = `In healthcare, QuickRevert enables:
+- Appointment scheduling automation  
+- Secure data handling & reporting  
+- Voice-based assistants for patients  
+- AI-powered analytics for hospitals`;
+              newOptions = [
+                '🏥 See a Hospital Case Study',
+                '🔙 Return to Industry Menu'
+              ];
+              break;
+            case '🏫 Education':
+              responseText = `For educational institutes 🎓:
+- Automate admissions & class scheduling  
+- Generate student progress reports  
+- AI chatbots for FAQs & guidance  
+- Smart reminders for teachers and students`;
+              newOptions = [
+                '📘 View Education Use Case',
+                '🔙 Return to Industry Menu'
+              ];
+              break;
+            case '🏪 Retail & E-commerce':
+              responseText = `In retail and e-commerce 🛒:
+- AI chatbots for customer engagement  
+- Order tracking automation  
+- Inventory sync between platforms  
+- Personalized recommendations`;
+              newOptions = [
+                '🛍️ View Retail Case Study',
+                '🔙 Return to Industry Menu'
+              ];
+              break;
+            case '🏢 Corporate / Enterprise':
+              responseText = `For large organizations 🏢:
+- Automate meeting management  
+- Integrate multiple apps via one workflow  
+- Generate daily analytics summaries  
+- Build custom AI dashboards`;
+              newOptions = [
+                '💼 View Enterprise Solutions',
+                '🔙 Return to Industry Menu'
+              ];
+              break;
+            case '📈 Why Businesses Choose QuickRevert':
+              responseText = `Here’s why 100+ teams choose QuickRevert 🚀
+
+✅ No-code automations — Launch in hours, not weeks  
+✅ Smart AI Agents — Handle repetitive tasks 24/7  
+✅ Scalable — Works across apps, industries & teams  
+✅ Customizable — We tailor the flow for your business`;
+              newOptions = [
+                '🧩 See Client Success Stories',
+                '💬 Request a Custom Workflow',
+                '🔙 Return to Main Menu'
+              ];
+              break;
+            case '🆘 Get Support or Learn More':
+              responseText = `Need help or more info? Here’s how to reach us 👇
+
+💬 Telegram Support: t.me/QuickRevertSupport  
+
+💌 Email: connectquickrevert@gmail.com`;
+              newOptions = [
+                '🙋‍♂️ Talk to Support',
+                '📚 Browse FAQs',
+                '🔙 Return to Main Menu'
+              ];
+              break;
+            case '📚 Browse FAQs':
+              responseText = `Here are some common questions users ask 👇  \nTap on a topic to view the answer ⤵️`;
+              newOptions = [
+                '❓ What is QuickRevert?',
+                '❓ How does QuickRevert integrate with Google Workspace?',
+                '❓ Can I connect my WhatsApp or Telegram?',
+                '❓ What industries does QuickRevert support?',
+                '❓ How secure is my data?',
+                '❓ How do I get started?',
+                '❓ Can I get a custom automation built?',
+                '❓ Where can I contact support?',
+                '🔙 Return to Support Menu'
+              ];
+              break;
+            case '❓ What is QuickRevert?':
+              responseText = `QuickRevert is an AI-powered automation platform that connects your tools like Google, Slack, Notion, and WhatsApp. It helps you book meetings, manage tasks, and automate repetitive workflows — all from one place.`;
+              newOptions = [
+                '🔙 Return to FAQ Menu'
+              ];
+              break;
+            case '❓ How does QuickRevert integrate with Google Workspace?':
+              responseText = `We integrate directly with your Google Calendar, Drive, Sheets, and Gmail using secure OAuth. You can:  
+
+📅 Automatically create/update calendar meetings  
+📊 Sync data from Google Sheets  
+📂 Search files with AI  
+📧 Trigger actions from emails`;
+              newOptions = [
+                '🔙 Return to FAQ Menu'
+              ];
+              break;
+            case '❓ Can I connect my WhatsApp or Telegram?':
+              responseText = `✅ Yes! QuickRevert supports chat-based automation on WhatsApp and Telegram. You can build bots that:  
+
+- Schedule meetings  
+- Send reminders  
+- Answer FAQs  
+- Capture leads`;
+              newOptions = [
+                '🔙 Return to FAQ Menu'
+              ];
+              break;
+            case '❓ What industries does QuickRevert support?':
+              responseText = `We work across multiple domains:  
+
+🏭 Manufacturing / Industrial Automation  
+🏥 Healthcare  
+🏫 Education  
+🛒 Retail / E-commerce  
+🏢 Corporate Enterprises  
+
+You can explore all industry use cases in the Industry Menu above 👆`;
+              newOptions = [
+                '🔙 Return to FAQ Menu'
+              ];
+              break;
+            case '❓ How secure is my data?':
+              responseText = `🔒 We use Google OAuth 2.0 for authentication and AES-256 encryption for stored data. All your information stays private — we never share or store credentials outside your cloud provider.`;
+              newOptions = [
+                '🔙 Return to FAQ Menu'
+              ];
+              break;
+            case '❓ How do I get started?':
+              responseText = `You can start in 3 simple steps 🚀  
+
+1️⃣ Click Book a Demo  
+2️⃣ Share your automation requirements  
+3️⃣ We set up your first workflow in under 24 hours`;
+              newOptions = [
+                '🔙 Return to FAQ Menu'
+              ];
+              break;
+            case '❓ Can I get a custom automation built?':
+              responseText = `Yes — QuickRevert specializes in custom, AI-driven workflows. You can integrate CRMs, IoT devices, internal apps, or custom APIs. 💬 Just message “Build custom automation” and we’ll guide you through it.`;
+              newOptions = [
+                '🔙 Return to FAQ Menu'
+              ];
+              break;
+            case '❓ Where can I contact support?':
+              responseText = `💬 Telegram: t.me/QuickRevert_Tech_Bot
+
+📧 Email: connectquickrevert@gmail.com 
+
+We’re available 24/7.`;
+              newOptions = [
+                '🔙 Return to FAQ Menu'
+              ];
+              break;
+            case '🔙 Return to FAQ Menu':
+              // Return to FAQ menu
+              responseText = `Here are some common questions users ask 👇  \nTap on a topic to view the answer ⤵️`;
+              newOptions = [
+                '❓ What is QuickRevert?',
+                '❓ How does QuickRevert integrate with Google Workspace?',
+                '❓ Can I connect my WhatsApp or Telegram?',
+                '❓ What industries does QuickRevert support?',
+                '❓ How secure is my data?',
+                '❓ How do I get started?',
+                '❓ Can I get a custom automation built?',
+                '❓ Where can I contact support?',
+                '🔙 Return to Support Menu'
+              ];
+              break;
+            case '🔙 Return to Industry Menu':
+            case '🔙 Return to Support Menu':
+            case 'Main Menu':
+            default:
+              // Return to main menu
+              responseText = 'Hey 👋 Welcome to QuickRevert Assistant!\n\nHow can I help you today?';
+              newOptions = [
+                '📅 Book a Meeting / Demo',
+                '💡 About Our Services',
+                '🏢 Industry Use Cases',
+                '📈 Why Businesses Choose QuickRevert',
+                '🆘 Get Support or Learn More'
+              ];
+              break;
+              // Return to FAQ menu
+              responseText = `Here are some common questions users ask 👇  \nTap on a topic to view the answer ⤵️`;
+              newOptions = [
+                '❓ What is QuickRevert?',
+                '❓ How does QuickRevert integrate with Google Workspace?',
+                '❓ Can I connect my WhatsApp or Telegram?',
+                '❓ What industries does QuickRevert support?',
+                '❓ How secure is my data?',
+                '❓ How do I get started?',
+                '❓ Can I get a custom automation built?',
+                '❓ Where can I contact support?',
+                '🔙 Return to Support Menu'
+              ];
+              break;
+          }
+              
+          // Add response message
+          const responseElement = document.createElement('div');
+          responseElement.className = 'menu-chat-message';
+          responseElement.innerHTML = `
+            <div class="menu-chat-message__content">
+              <div class="menu-chat-message__bubble">
+                ${responseText.replace(/\n/g, '<br>')}
+              </div>
+              <div class="menu-chat-message__timestamp">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+            </div>
+          `;
+          messagesContainer.appendChild(responseElement);
+              
+          // Add new options
+          const newOptionsContainer = document.createElement('div');
+          newOptionsContainer.className = 'menu-options';
+          newOptions.forEach((opt, index) => {
+            const optionButton = document.createElement('button');
+            optionButton.className = 'menu-option';
+            optionButton.textContent = opt;
+            optionButton.addEventListener('click', function() {
+              handleMenuOption(opt);
+            });
+            newOptionsContainer.appendChild(optionButton);
+          });
+          messagesContainer.appendChild(newOptionsContainer);
+          messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        };
+        
+        // Update the initial menu options to match the new structure
+        document.querySelectorAll('.menu-option').forEach(button => {
+          button.addEventListener('click', function() {
+            const optionText = this.textContent;
+            handleMenuOption(optionText);
+          });
+        });
       });
     </script>
   </body>
