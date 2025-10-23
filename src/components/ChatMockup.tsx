@@ -15,7 +15,7 @@ export function ChatMockup() {
             <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
               <div className="w-6 h-6 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full"></div>
             </div>
-            <span className="font-medium">Chat Agent</span>
+            <span className="font-medium">Chat Assistant</span>
           </div>
 
           {/* Chat Messages */}
