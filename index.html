@@ -633,7 +633,7 @@
           messagesContainer.scrollTop = messagesContainer.scrollHeight;
           
           try {
-            // Send message to n8n webhook
+            // Send message to n8n webhook with retry logic
             let webhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL;
             
             // Fallback to direct URL if environment variable is not available
@@ -656,31 +656,69 @@
               timestamp: new Date().toISOString()
             });
             
-            // Add timeout to fetch request
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+            // Retry logic - attempt up to 3 times
+            let lastError;
+            let response;
             
-            const response = await fetch(webhookUrl, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                // Simplified payload that n8n webhooks typically expect
-                webhookData: {
-                  message: message,
-                  timestamp: new Date().toISOString()
-                },
-                message: message,
-                text: message,
-                timestamp: new Date().toISOString()
-              }),
-              signal: controller.signal,
-              // Add mode: 'no-cors' as a fallback, but this will limit response access
-              // mode: 'no-cors'
-            });
+            for (let attempt = 1; attempt <= 3; attempt++) {
+              try {
+                // Add timeout to fetch request
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+                
+                response = await fetch(webhookUrl, {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                    // Simplified payload that n8n webhooks typically expect
+                    webhookData: {
+                      message: message,
+                      timestamp: new Date().toISOString()
+                    },
+                    message: message,
+                    text: message,
+                    timestamp: new Date().toISOString()
+                  }),
+                  signal: controller.signal,
+                });
+                
+                clearTimeout(timeoutId);
+                
+                // If successful, break out of retry loop
+                if (response.ok) {
+                  console.log(`Request succeeded on attempt ${attempt}`);
+                  break;
+                } else {
+                  console.warn(`Attempt ${attempt} failed with status ${response.status}`);
+                  lastError = new Error(`HTTP error! status: ${response.status}`);
+                  
+                  // Don't retry on client errors (4xx), only on server errors (5xx) or network issues
+                  if (response.status >= 400 && response.status < 500) {
+                    break;
+                  }
+                  
+                  // Wait before retrying (exponential backoff)
+                  if (attempt < 3) {
+                    await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
+                  }
+                }
+              } catch (error) {
+                console.warn(`Attempt ${attempt} failed with error:`, error);
+                lastError = error;
+                
+                // Wait before retrying (exponential backoff)
+                if (attempt < 3) {
+                  await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
+                }
+              }
+            }
             
-            clearTimeout(timeoutId);
+            // If all attempts failed, throw the last error
+            if (!response || !response.ok) {
+              throw lastError || new Error('All retry attempts failed');
+            }
             
             console.log('Response status:', response.status);
             console.log('Response headers:', [...response.headers.entries()]);
@@ -732,14 +770,17 @@
             typingIndicator.remove();
             
             // Show more detailed error message
-            let errorMessage = "Sorry, I encountered an error processing your request. Please try again.";
+            let errorMessage = "Sorry, I'm having trouble connecting to our chat service. Please try again in a moment.";
             if (error instanceof TypeError && error.message.includes('fetch')) {
-              errorMessage = "Network error: Unable to connect to the chat service. Please check your connection and try again.";
+              errorMessage = "I'm having trouble connecting to our chat service. Please check your internet connection and try again.";
             } else if (error.name === 'AbortError') {
-              errorMessage = "Request timeout: The chat service is taking too long to respond. Please try again.";
+              errorMessage = "Sorry, our chat service is taking longer than expected to respond. Please try again.";
             } else if (error.message) {
-              errorMessage = `Error: ${error.message}`;
+              errorMessage = "Sorry, something went wrong. Please try again in a moment.";
             }
+            
+            // Add suggestion for alternative contact
+            errorMessage += " If this continues, please email us at support@quickrevert.com.";
             
             // Show error message only if it's not the initial message
             if (!isInitial) {
@@ -751,7 +792,7 @@
         // Send initial message when chat opens
         const sendInitialMessage = () => {
           // Add the predefined welcome message
-          addMessage("Hello, I am Quickrevert ! How can I help you today ?");
+          addMessage("Hello, I am Quickrevert! How can I help you today?");
         };
         
         const sendMessage = async () => {
@@ -779,7 +820,8 @@
         // Automatically open chat on page load and send initial message
         setTimeout(() => {
           chatContainer.classList.add('active');
-          sendInitialMessage();
+          // Delay initial message to ensure UI is ready
+          setTimeout(sendInitialMessage, 500);
         }, 1000);
       
         // Create menu-driven chat button
