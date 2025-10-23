@@ -483,7 +483,7 @@ export default function Hero() {
                     <div className="hero-chat-avatar">🤖</div>
                     <div>
                       <div className="hero-chat-bubble">
-                        <div className="hero-chat-time">Today 9:12 AM</div>
+                        <div className="hero-chat-time">Today 10:11 AM</div>
                         Hello! I'm Quickrevert, your AI assistant. How can I help you today?
                       </div>
                     </div>
