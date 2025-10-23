@@ -13,11 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build Vite app
-        run: |
-          npm ci
-          npm run build
-
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v0.1.10
         with:
