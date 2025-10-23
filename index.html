@@ -634,17 +634,61 @@
           
           try {
             // Send message to n8n webhook
-            const webhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL;
+            let webhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL;
+            
+            // Fallback to direct URL if environment variable is not available
+            if (!webhookUrl) {
+              console.warn('Webhook URL not found in environment variables, using fallback URL');
+              webhookUrl = 'https://n8n.quickrevert.tech/webhook/bf4dd093-bb02-472c-9454-7ab9af97bd1d';
+            }
+            
+            // Final check if webhook URL is properly loaded
+            if (!webhookUrl) {
+              console.error('Webhook URL not found in environment variables');
+              console.error('Available environment variables:', import.meta.env);
+              throw new Error('Webhook URL not found. Please check your environment configuration.');
+            }
+            
+            // Log the webhook URL for debugging (remove in production)
+            console.log('Sending request to webhook:', webhookUrl);
+            console.log('Request payload:', {
+              message: message,
+              timestamp: new Date().toISOString()
+            });
+            
+            // Add timeout to fetch request
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+            
             const response = await fetch(webhookUrl, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
               },
               body: JSON.stringify({
+                // Simplified payload that n8n webhooks typically expect
+                webhookData: {
+                  message: message,
+                  timestamp: new Date().toISOString()
+                },
                 message: message,
+                text: message,
                 timestamp: new Date().toISOString()
-              })
+              }),
+              signal: controller.signal,
+              // Add mode: 'no-cors' as a fallback, but this will limit response access
+              // mode: 'no-cors'
             });
+            
+            clearTimeout(timeoutId);
+            
+            console.log('Response status:', response.status);
+            console.log('Response headers:', [...response.headers.entries()]);
+            
+            // Log response text for debugging
+            const responseClone = response.clone();
+            const responseTextDebug = await responseClone.text();
+            console.log('Response text:', responseTextDebug);
             
             // Remove typing indicator
             typingIndicator.remove();
@@ -687,9 +731,19 @@
             // Remove typing indicator
             typingIndicator.remove();
             
+            // Show more detailed error message
+            let errorMessage = "Sorry, I encountered an error processing your request. Please try again.";
+            if (error instanceof TypeError && error.message.includes('fetch')) {
+              errorMessage = "Network error: Unable to connect to the chat service. Please check your connection and try again.";
+            } else if (error.name === 'AbortError') {
+              errorMessage = "Request timeout: The chat service is taking too long to respond. Please try again.";
+            } else if (error.message) {
+              errorMessage = `Error: ${error.message}`;
+            }
+            
             // Show error message only if it's not the initial message
             if (!isInitial) {
-              addMessage("Sorry, I encountered an error processing your request. Please try again.");
+              addMessage(errorMessage);
             }
           }
         };
