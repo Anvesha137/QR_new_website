@@ -598,15 +598,25 @@
         const sendButton = document.querySelector('.n8n-chat-input__button');
         const messagesContainer = document.querySelector('.n8n-chat-messages');
         
+        // Function to convert URLs in text to clickable links
+        const makeUrlsClickable = (text) => {
+          const urlRegex = /(https?:\/\/[^\s]+)/g;
+          return text.replace(urlRegex, url => `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color: #6366f1; text-decoration: underline;">${url}</a>`);
+        };
+
         // Function to add a message to the chat
         const addMessage = (message, isUser = false) => {
           const messageElement = document.createElement('div');
           messageElement.className = `n8n-chat-message n8n-chat-message--${isUser ? 'user' : 'bot'}`;
+          
+          // Process message text to make URLs clickable
+          const processedMessage = makeUrlsClickable(message);
+          
           messageElement.innerHTML = `
             <div class="n8n-chat-message__avatar">${isUser ? 'U' : 'Q'}</div>
             <div class="n8n-chat-message__content">
               <div class="n8n-chat-message__bubble">
-                ${message}
+                ${processedMessage}
               </div>
               <div class="n8n-chat-message__timestamp">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
             </div>
