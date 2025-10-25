@@ -643,8 +643,57 @@
           messagesContainer.scrollTop = messagesContainer.scrollHeight;
           
           try {
+            // Test if sessionStorage is available
+            const sessionStorageAvailable = typeof(Storage) !== "undefined" && sessionStorage;
+            console.log('Session storage available:', sessionStorageAvailable);
+            
+            let sessionId = null;
+            
+            // Try to get existing session ID
+            if (sessionStorageAvailable) {
+              try {
+                sessionId = sessionStorage.getItem('n8nChatSessionId');
+                console.log('Existing session ID from sessionStorage:', sessionId);
+              } catch (e) {
+                console.warn('Error reading from sessionStorage:', e);
+              }
+            }
+            
+            // Generate a new session ID if none exists
+            if (!sessionId) {
+              // Generate a more robust session ID
+              const timestamp = Date.now().toString(36);
+              const randomPart = Math.random().toString(36).substring(2, 15);
+              sessionId = 'session_' + timestamp + '_' + randomPart;
+              console.log('Generated new session ID:', sessionId);
+              
+              // Save to sessionStorage if available
+              if (sessionStorageAvailable) {
+                try {
+                  sessionStorage.setItem('n8nChatSessionId', sessionId);
+                  console.log('Saved new session ID to sessionStorage:', sessionId);
+                } catch (e) {
+                  console.warn('Failed to save session ID to sessionStorage:', e);
+                }
+              } else {
+                console.log('Session storage not available, not saving session ID');
+              }
+            } else {
+              console.log('Using existing session ID:', sessionId);
+            }
+            
+            // Double check that we have a session ID
+            if (!sessionId) {
+              console.error('Failed to generate or retrieve session ID');
+              sessionId = 'session_unknown_' + Date.now();
+              console.log('Using fallback session ID:', sessionId);
+            }
+            
+            console.log('Final session ID being used:', sessionId);
+            
             // Send message to n8n webhook with retry logic
             let webhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL;
+            console.log('Environment variable VITE_N8N_WEBHOOK_URL:', import.meta.env.VITE_N8N_WEBHOOK_URL);
             
             // Fallback to direct URL if environment variable is not available
             if (!webhookUrl) {
@@ -661,10 +710,29 @@
             
             // Log the webhook URL for debugging (remove in production)
             console.log('Sending request to webhook:', webhookUrl);
-            console.log('Request payload:', {
+            
+            // Generate session ID one more time to ensure it's not null
+            if (!sessionId) {
+              const timestamp = Date.now().toString(36);
+              const randomPart = Math.random().toString(36).substring(2, 15);
+              sessionId = 'session_' + timestamp + '_' + randomPart;
+              console.log('Regenerated session ID:', sessionId);
+            }
+            
+            // Create a simpler payload with session ID
+            const payload = {
               message: message,
-              timestamp: new Date().toISOString()
-            });
+              text: message,
+              sessionId: sessionId,
+              timestamp: new Date().toISOString(),
+              webhookData: {
+                message: message,
+                sessionId: sessionId,
+                timestamp: new Date().toISOString()
+              }
+            };
+            
+            console.log('Final payload being sent:', JSON.stringify(payload, null, 2));
             
             // Retry logic - attempt up to 3 times
             let lastError;
@@ -676,25 +744,28 @@
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
                 
-                response = await fetch(webhookUrl, {
+                console.log(`Attempt ${attempt}: Sending request to ${webhookUrl}`);
+                console.log(`Attempt ${attempt}: Payload being sent:`, JSON.stringify(payload, null, 2));
+                
+                // Log fetch options
+                const fetchOptions = {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',
                   },
-                  body: JSON.stringify({
-                    // Simplified payload that n8n webhooks typically expect
-                    webhookData: {
-                      message: message,
-                      timestamp: new Date().toISOString()
-                    },
-                    message: message,
-                    text: message,
-                    timestamp: new Date().toISOString()
-                  }),
+                  body: JSON.stringify(payload),
                   signal: controller.signal,
-                });
+                };
+                
+                console.log(`Attempt ${attempt}: Fetch options:`, JSON.stringify(fetchOptions, null, 2));
+                
+                response = await fetch(webhookUrl, fetchOptions);
                 
                 clearTimeout(timeoutId);
+                
+                // Log the actual request details
+                console.log(`Attempt ${attempt}: Request sent with session ID:`, sessionId);
+                console.log(`Attempt ${attempt}: Response status:`, response.status);
                 
                 // If successful, break out of retry loop
                 if (response.ok) {
@@ -730,13 +801,15 @@
               throw lastError || new Error('All retry attempts failed');
             }
             
-            console.log('Response status:', response.status);
-            console.log('Response headers:', [...response.headers.entries()]);
-            
             // Log response text for debugging
             const responseClone = response.clone();
             const responseTextDebug = await responseClone.text();
             console.log('Response text:', responseTextDebug);
+            console.log('Response status:', response.status);
+            console.log('Response headers:', [...response.headers.entries()]);
+            
+            // Log the actual request that was sent
+            console.log('Session ID sent in request:', sessionId);
             
             // Remove typing indicator
             typingIndicator.remove();
@@ -748,13 +821,16 @@
               try {
                 const errorData = await response.json();
                 responseText = errorData.message || errorData.error || `HTTP error! status: ${response.status}`;
+                console.log('Error response data:', errorData);
               } catch (e) {
                 responseText = `HTTP error! status: ${response.status}`;
+                console.log('Error parsing JSON response:', e);
               }
             } else {
               // Try to parse response as JSON
               try {
                 const data = await response.json();
+                console.log('Success response data (parsed as JSON):', data);
                 
                 // Extract and display only the output field from n8n response
                 if (typeof data === 'string') {
@@ -767,9 +843,14 @@
                 }
               } catch (e) {
                 // If not JSON, get as text
+                console.log('Response is not JSON, getting as text');
                 responseText = await response.text();
+                console.log('Response text content:', responseText);
               }
             }
+            
+            // Log final session ID for verification
+            console.log('Final session ID after response:', sessionId);
             
             // Add bot response
             addMessage(responseText);
@@ -803,6 +884,15 @@
         const sendInitialMessage = () => {
           // Add the predefined welcome message
           addMessage("Hello, I am Quickrevert! How can I help you today?");
+          
+          // Also send a message to the webhook to initialize the session
+          console.log('Sending initial message to webhook');
+          // Generate a session ID for the initial message as well
+          const timestamp = Date.now().toString(36);
+          const randomPart = Math.random().toString(36).substring(2, 15);
+          const initialSessionId = 'session_' + timestamp + '_' + randomPart;
+          console.log('Initial session ID:', initialSessionId);
+          sendToWebhook("Hello, I am Quickrevert! How can I help you today?", true);
         };
         
         const sendMessage = async () => {
@@ -816,6 +906,7 @@
           inputField.value = '';
           
           // Send to webhook
+          console.log('Sending user message to webhook:', message);
           sendToWebhook(message);
         };
         
