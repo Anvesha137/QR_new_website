@@ -3,10 +3,6 @@ export default function Hero() {
     window.open("https://calendar.app.google/7sNSsJgarZS4Kzd37", "_blank");
   };
 
-  const handleGetEarlyAccessClick = () => {
-    window.open("https://calendar.app.google/7sNSsJgarZS4Kzd37", "_blank");
-  };
-
   const handleStartChatClick = () => {
     // Toggle the chat widget visibility
     const chatContainer = document.getElementById('n8n-chat-container');
@@ -133,137 +129,17 @@ export default function Hero() {
           z-index: 1;
         }
 
-        .hero-chat-mockup {
-          background: #f1f5f9;
+        .hero-image-container {
           border-radius: 1rem;
-          padding: 1.5rem;
+          overflow: hidden;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
           position: relative;
-          overflow: hidden;
         }
 
-        .hero-chat-window {
-          background: white;
-          border-radius: 0.75rem;
-          overflow: hidden;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-          position: relative;
-          z-index: 1;
-        }
-
-        .hero-chat-header {
-          background: #0f172a;
-          color: white;
-          padding: 0.75rem;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          font-weight: 500;
-          font-size: 0.875rem;
-        }
-
-        .hero-chat-icon {
-          width: 1.75rem;
-          height: 1.75rem;
-          background: white;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #0f172a;
-          font-size: 0.75rem;
-          font-weight: 600;
-        }
-
-        .hero-chat-body {
-          padding: 1rem;
-          min-height: 16rem;
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-        }
-
-        .hero-chat-message {
-          display: flex;
-          gap: 0.5rem;
-        }
-
-        .hero-chat-avatar {
-          width: 1.75rem;
-          height: 1.75rem;
-          background: #0f172a;
-          border-radius: 50%;
-          flex-shrink: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          font-size: 0.75rem;
-          font-weight: 600;
-        }
-
-        .hero-chat-bubble {
-          background: #f1f5f9;
-          padding: 0.75rem 1rem;
-          border-radius: 1rem;
-          font-size: 0.75rem;
-          color: #334155;
-          max-width: 80%;
-          line-height: 1.4;
-        }
-
-        .hero-chat-time {
-          font-size: 0.625rem;
-          color: #94a3b8;
-          margin-bottom: 0.125rem;
-        }
-
-        .hero-chat-bubble-user {
-          background: #e0e7ff;
-          margin-left: auto;
-          color: #4f46e5;
-        }
-
-        .hero-chat-input {
-          padding: 0.75rem;
-          border-top: 1px solid #e2e8f0;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-        }
-
-        .hero-chat-input input {
-          flex: 1;
-          padding: 0.5rem 0.75rem;
-          border: 1px solid #e2e8f0;
-          border-radius: 9999px;
-          font-size: 0.75rem;
-          outline: none;
-          background: #f8fafc;
-          transition: all 0.2s;
-        }
-
-        .hero-chat-input input:focus {
-          border-color: #6366f1;
-          box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
-        }
-
-        .hero-chat-send {
-          width: 2rem;
-          height: 2rem;
-          background: #0f172a;
-          border: none;
-          border-radius: 50%;
-          color: white;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition: all 0.2s;
-        }
-
-        .hero-chat-send:hover {
-          background: #1e293b;
+        .hero-image-container img {
+          width: 100%;
+          height: auto;
+          display: block;
         }
 
         .hero-features {
@@ -381,47 +257,6 @@ export default function Hero() {
             font-size: 0.625rem;
           }
 
-          .hero-chat-body {
-            min-height: 14rem;
-            padding: 0.75rem;
-          }
-
-          .hero-chat-header {
-            padding: 0.5rem;
-            font-size: 0.75rem;
-          }
-
-          .hero-chat-icon {
-            width: 1.5rem;
-            height: 1.5rem;
-            font-size: 0.625rem;
-          }
-
-          .hero-chat-avatar {
-            width: 1.5rem;
-            height: 1.5rem;
-            font-size: 0.625rem;
-          }
-
-          .hero-chat-bubble {
-            font-size: 0.625rem;
-            padding: 0.5rem 0.75rem;
-          }
-
-          .hero-chat-input {
-            padding: 0.5rem;
-          }
-
-          .hero-chat-input input {
-            padding: 0.5rem 0.75rem;
-            font-size: 0.625rem;
-          }
-
-          .hero-chat-send {
-            width: 1.75rem;
-            height: 1.75rem;
-          }
-
           .hero-features {
             gap: 0.75rem;
             padding: 0.75rem;
@@ -449,7 +284,7 @@ export default function Hero() {
               AI-Powered Solutions
             </div>
             <h1 className="hero-title">
-              Transform Your Customer Experience with <span className="hero-title-highlight">Quickrevert</span>
+              Scale Your Business. Automate Your Conversations using <span className="hero-title-highlight">QuickRevert</span>
             </h1>
             <h2 className="hero-subtitle">
               Intelligent Chatbots that Sell, Support & Convert 24/7
@@ -458,8 +293,8 @@ export default function Hero() {
               Never miss a lead again. Quickrevert's AI chatbots engage customers instantly, provide personalized support, and drive conversions around the clock.
             </p>
             <div className="hero-buttons">
-              <button className="hero-btn-primary" onClick={handleGetEarlyAccessClick}>Get Early Access</button>
-              <button className="hero-btn-secondary" onClick={handleBookDemoClick}>Book A Demo</button>
+              <button className="hero-btn-primary" onClick={handleBookDemoClick}>Book a Free Demo</button>
+              <button className="hero-btn-secondary" onClick={handleStartChatClick}>Chat with us</button>
             </div>
             <div className="hero-note">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -472,53 +307,8 @@ export default function Hero() {
           </div>
 
           <div className="hero-image">
-            <div className="hero-chat-mockup">
-              <div className="hero-chat-window">
-                <div className="hero-chat-header">
-                  <div className="hero-chat-icon">Q</div>
-                  Quickrevert Assistant
-                </div>
-                <div className="hero-chat-body">
-                  <div className="hero-chat-message">
-                    <div className="hero-chat-avatar">🤖</div>
-                    <div>
-                      <div className="hero-chat-bubble">
-                        <div className="hero-chat-time">Today 12:10 AM</div>
-                        Hello! I'm Quickrevert, your AI assistant. How can I help you today?
-                      </div>
-                    </div>
-                  </div>
-                  <div className="hero-chat-message">
-                    {/* <div className="hero-chat-avatar">👤</div>
-                    <div>
-                      <div className="hero-chat-bubble">
-                        Hi! I'm interested in learning more about your chatbot solutions.
-                      </div>
-                    </div> */}
-                  </div>
-                  <div className="hero-chat-message" style={{justifyContent: 'flex-end'}}>
-                    <div className="hero-chat-bubble hero-chat-bubble-user">
-                      Hello, I'm James from TechCorp. Can you show me a demo?
-                    </div>
-                  </div>
-                  <div className="hero-chat-message">
-                    <div className="hero-chat-avatar">🤖</div>
-                    <div>
-                      <div className="hero-chat-bubble">
-                        Absolutely, James! I'd be happy to show you how Quickrevert can transform your customer experience.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="hero-chat-input">
-                  <input type="text" placeholder="Type your message here..." />
-                  <button className="hero-chat-send">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M2 21l21-9L2 3v7l15 2-15 2z"/>
-                    </svg>
-                  </button>
-                </div>
-              </div>
+            <div className="hero-image-container">
+              <img src="/HeroImg.png" alt="QuickRevert Dashboard" />
             </div>
           </div>
         </div>

@@ -40,14 +40,14 @@ export default function Navbar() {
         }
 
         .navbar-logo-icon {
-          width: 10rem;
-          height: 3rem;
+          width: 15rem;
+          height: 4rem;
         }
 
         .navbar-nav {
           display: flex;
           align-items: center;
-          gap: 1rem;
+          gap: 1.5rem;
           flex: 1;
           justify-content: center;
         }
@@ -55,7 +55,7 @@ export default function Navbar() {
         .navbar-link {
           color: #374151;
           text-decoration: none;
-          font-size: 0.8125rem;
+          font-size: 1rem;
           font-weight: 500;
           cursor: pointer;
           transition: all 0.2s ease;
@@ -110,26 +110,6 @@ export default function Navbar() {
           background: #4f46e5;
         }
 
-        .navbar-secondary {
-          width: 100%;
-          background: #f9fafb;
-          border-bottom: 1px solid #e5e7eb;
-          padding: 0.5rem 1rem;
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-        }
-
-        .navbar-secondary-title {
-          font-size: 1rem;
-          font-weight: 600;
-          color: #1f2937;
-        }
-
-        .navbar-secondary-title span {
-          color: #6366f1;
-        }
-
         .navbar-btn-start {
           padding: 0.375rem 0.75rem;
           background: #6366f1;
@@ -149,7 +129,7 @@ export default function Navbar() {
 
         @media (max-width: 1024px) {
           .navbar-nav {
-            gap: 0.75rem;
+            gap: 1rem;
           }
         }
 
@@ -160,7 +140,7 @@ export default function Navbar() {
           }
           
           .navbar-nav {
-            gap: 0.5rem;
+            gap: 0.75rem;
             order: 3;
             width: 100%;
             justify-content: center;
@@ -168,7 +148,12 @@ export default function Navbar() {
           }
           
           .navbar-link {
-            font-size: 0.75rem;
+            font-size: 0.875rem;
+          }
+          
+          .navbar-logo-icon {
+            width: 12rem;
+            height: 3.5rem;
           }
         }
       `}</style>
@@ -183,21 +168,16 @@ export default function Navbar() {
         </a>
 
         <nav className="navbar-nav">
-          <a href="#methodology" className="navbar-link">Methodology</a>
-          <a href="#platforms" className="navbar-link">Platforms</a>
-          <a href="#features" className="navbar-link">Features</a>
+          <a href="#products" className="navbar-link">Products</a>
+          <a href="#solutions" className="navbar-link">Solutions</a>
+          <a href="#integrations" className="navbar-link">Integrations</a>
           <a href="#pricing" className="navbar-link">Pricing</a>
+          <a href="#analytics" className="navbar-link">Analytics</a>
         </nav>
 
         <div className="navbar-actions">
-          <button className="navbar-btn-demo" onClick={handleBookDemoClick}>Book A Demo</button>
-          <button className="navbar-btn-start" onClick={handleStartChatClick}>Start With Chat Agent</button>
-        </div>
-      </div>
-
-      <div className="navbar-secondary">
-        <div className="navbar-secondary-title">
-          <span>Chat</span> Agent
+          <button className="navbar-btn-demo" onClick={handleBookDemoClick}>Book a Free Demo</button>
+          <button className="navbar-btn-start" onClick={handleStartChatClick}>Chat with us</button>
         </div>
       </div>
     </>
