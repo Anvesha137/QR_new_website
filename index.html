@@ -211,11 +211,11 @@
       /* Calendar booking button */
       .booking-button {
         display: inline-block;
-        background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+        background: linear-gradient(135deg, #317d4d 0%, #22c55e 100%);
         color: white;
         text-decoration: none;
         font-weight: 600;
-        padding: 12px 20px;
+        padding: 7px 7px;
         border-radius: 16px;
         margin: 8px 0;
         box-shadow: 0 2px 4px rgba(74, 222, 128, 0.2);
@@ -1030,17 +1030,8 @@
         
         // Send initial message when chat opens
         const sendInitialMessage = () => {
-          // Add the predefined welcome message
-          // addMessage("Hello, I am Quickrevert! How can I help you today?");
-          
-          // Also send a message to the webhook to initialize the session
-          console.log('Sending initial message to webhook');
-          // Generate a session ID for the initial message as well
-          const timestamp = Date.now().toString(36);
-          const randomPart = Math.random().toString(36).substring(2, 15);
-          const initialSessionId = 'session_' + timestamp + '_' + randomPart;
-          console.log('Initial session ID:', initialSessionId);
-          sendToWebhook("Hello, I am Quickrevert! How can I help you today?", true);
+          // Add the predefined welcome message only to the UI, not to the webhook
+          addMessage("Hello, I am Quickrevert! How can I help you today?");
         };
         
         const sendMessage = async () => {
@@ -1053,7 +1044,7 @@
           // Clear input
           inputField.value = '';
           
-          // Send to webhook
+          // Send to webhook only when user sends a message
           console.log('Sending user message to webhook:', message);
           sendToWebhook(message);
         };
@@ -1066,11 +1057,10 @@
           }
         });
         
-        // Automatically open chat on page load and send initial message
+        // Automatically open chat on page load but don't send any initial message
         setTimeout(() => {
           chatContainer.classList.add('active');
-          // Delay initial message to ensure UI is ready
-          setTimeout(sendInitialMessage, 500);
+          // Don't send initial message - wait for user to initiate conversation
         }, 1000);
       
         // Create menu-driven chat button
